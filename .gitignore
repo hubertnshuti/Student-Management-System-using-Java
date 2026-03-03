@@ -1,0 +1,11 @@
+# Compiled class files
+*.class
+
+# IntelliJ IDEA workspace files
+.idea/
+out/
+*.iml
+
+# OS generated files
+.DS_Store
+Thumbs.db

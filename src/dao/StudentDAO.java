@@ -117,17 +117,18 @@ public class StudentDAO {
         List<Student> students = new ArrayList<>();
 
         String sql = """
+            
                 SELECT * FROM students
-                WHERE CAST(id AS TEXT) LIKE ?
-                   OR name LIKE ?
-                   OR email LIKE ?
-                   OR course LIKE ?
-                """;
+            WHERE CAST(id AS TEXT) LIKE ?
+               OR LOWER(name) LIKE LOWER(?)
+               OR LOWER(email) LIKE LOWER(?)
+               OR LOWER(course) LIKE LOWER(?)
+            """;
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            String searchPattern = "%" + keyword + "%";
+            String searchPattern = "%" + keyword.trim() + "%";
 
             pstmt.setString(1, searchPattern);
             pstmt.setString(2, searchPattern);
@@ -144,7 +145,6 @@ public class StudentDAO {
                         rs.getString("course"),
                         rs.getDouble("marks")
                 );
-
                 students.add(s);
             }
 

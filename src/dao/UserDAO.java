@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class UserDAO {
 
     public void addUser(User user) {
-        String sql = "INSERT INTO users(username, password) VALUES(?, ?)";
+        String sql = "INSERT OR IGNORE INTO users(username, password) VALUES(?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -20,7 +20,7 @@ public class UserDAO {
             pstmt.setString(2, user.getPassword());
 
             pstmt.executeUpdate();
-            System.out.println("User added successfully.");
+            System.out.println("Default user ensured.");
 
         } catch (SQLException e) {
             System.out.println("Add user failed: " + e.getMessage());

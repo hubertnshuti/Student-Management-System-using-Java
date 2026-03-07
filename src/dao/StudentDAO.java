@@ -117,11 +117,7 @@ public class StudentDAO {
         List<Student> students = new ArrayList<>();
 
         String sql = """
-                SELECT * FROM students
-                WHERE CAST(id AS TEXT) LIKE ?
-                   OR name LIKE ?
-                   OR email LIKE ?
-                   OR course LIKE ?
+                
                 """;
 
         try (Connection conn = DBConnection.getConnection();

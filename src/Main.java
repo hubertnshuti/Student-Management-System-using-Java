@@ -1,5 +1,5 @@
+import controller.LoginController;
 import db.DatabaseInitializer;
-import service.UserService;
 
 public class Main {
 
@@ -7,13 +7,14 @@ public class Main {
 
         DatabaseInitializer.initializeDatabase();
 
-        UserService userService = new UserService();
+        LoginController controller = new LoginController();
 
-        System.out.println(userService.registerUser("admin", "1234"));
+        String validation = controller.validateLoginInput("admin", "1234");
+        System.out.println("Validation result: " + validation);
 
-        boolean success = userService.loginUser("admin", "1234");
+        boolean success = controller.login("admin", "1234");
         System.out.println("Login success: " + success);
 
-        System.out.println("Step 20 finished.");
+        System.out.println("Step 21 finished.");
     }
 }

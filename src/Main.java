@@ -1,22 +1,18 @@
-import dao.StudentDAO;
-import models.Student;
+import db.DBConnection;
+
+import java.sql.Connection;
 
 public class Main {
+
     public static void main(String[] args) {
-        // Quick model test
-        Student s = new Student(
-                "Hubert Nshuti Ngendahayo",
-                "nshutihubert04@gmail.com",
-                "001",
-                "Computer Science",
-                90.5
-        );
 
-        s.displayInfo();
+        Connection conn = DBConnection.getConnection();
 
-        // Quick DAO placeholder test
-        StudentDAO dao = new StudentDAO();
-        dao.add();
-        dao.search("001");
+        if (conn != null) {
+            System.out.println("Database connected successfully.");
+        } else {
+            System.out.println("Database connection failed.");
+        }
+
     }
 }

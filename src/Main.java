@@ -8,7 +8,7 @@ public class Main {
                 "Hubert Nshuti Ngendahayo",
                 "nshutihubert04@gmail.com",
                 "001",
-                "Computer Science",
+                "Computer Scince",
                 90.5
         );
 

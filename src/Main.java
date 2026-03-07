@@ -1,6 +1,5 @@
 import dao.StudentDAO;
 import db.DatabaseInitializer;
-import models.Student;
 
 public class Main {
 
@@ -10,17 +9,8 @@ public class Main {
 
         StudentDAO dao = new StudentDAO();
 
-        Student s = new Student(
-                "John Doe",
-                "student@example.com",
-                "001",
-                "Computer Science",
-                85
-        );
+        dao.deleteStudent(1);
 
-        dao.addStudent(s);
-
-        System.out.println("Application finished.");
-
+        System.out.println("Delete operation finished.");
     }
 }

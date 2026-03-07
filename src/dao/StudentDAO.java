@@ -3,9 +3,9 @@ package dao;
 import db.DBConnection;
 import models.Student;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentDAO {
 
@@ -27,6 +27,60 @@ public class StudentDAO {
 
         } catch (SQLException e) {
             System.out.println("Insert failed: " + e.getMessage());
+        }
+    }
+
+
+    public List<Student> getAllStudents() {
+
+        List<Student> students = new ArrayList<>();
+
+        String sql = "SELECT * FROM students";
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+
+                Student s = new Student(
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        String.valueOf(rs.getInt("id")),
+                        rs.getString("course"),
+                        rs.getDouble("marks")
+                );
+
+                students.add(s);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Fetch failed: " + e.getMessage());
+        }
+
+        return students;
+    }
+
+
+    public void deleteStudent(int id) {
+
+        String sql = "DELETE FROM students WHERE id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+
+            int rows = pstmt.executeUpdate();
+
+            if (rows > 0) {
+                System.out.println("Student deleted successfully.");
+            } else {
+                System.out.println("Student not found.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Delete failed: " + e.getMessage());
         }
     }
 }

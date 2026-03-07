@@ -8,8 +8,8 @@ import javax.swing.table.DefaultTableModel;
 public class DashboardForm extends JFrame {
 
     private JPanel mainPanel;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField textName;
+    private JTextField textEmail;
     private JComboBox comboBox1;
     private JSlider slider1;
     private JButton addButton;
@@ -21,9 +21,10 @@ public class DashboardForm extends JFrame {
     private JRadioButton sortNameByZRadioButton;
     private JRadioButton sortByMarksRadioButton;
     private JRadioButton radioButton4;
-    private JTextField textField3;
+    private JTextField textSearch;
     private JButton searchButton1;
     private JTable studentTable;
+    private JTextField txtMarks;
 
     private final DashboardController dashboardController;
 

@@ -1,18 +1,12 @@
-import db.DBConnection;
-
-import java.sql.Connection;
+import db.DatabaseInitializer;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Connection conn = DBConnection.getConnection();
+        DatabaseInitializer.initializeDatabase();
 
-        if (conn != null) {
-            System.out.println("Database connected successfully.");
-        } else {
-            System.out.println("Database connection failed.");
-        }
+        System.out.println("Application started.");
 
     }
 }

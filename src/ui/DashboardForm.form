@@ -168,12 +168,12 @@
                       <text value="Sort by Marks"/>
                     </properties>
                   </component>
-                  <component id="ad7a6" class="javax.swing.JRadioButton" binding="radioButton4" default-binding="true">
+                  <component id="ad7a6" class="javax.swing.JRadioButton" binding="sortByID">
                     <constraints>
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="RadioButton"/>
+                      <text value="Sort by ID"/>
                     </properties>
                   </component>
                 </children>

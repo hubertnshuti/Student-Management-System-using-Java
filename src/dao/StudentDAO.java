@@ -1,26 +1,32 @@
 package dao;
 
-import database.DatabaseOperations;
+import db.DBConnection;
+import models.Student;
 
-public class StudentDAO implements DatabaseOperations {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-    @Override
-    public void add() {
-        System.out.println("DAO: Adding student to database...");
-    }
+public class StudentDAO {
 
-    @Override
-    public void delete() {
-        System.out.println("DAO: Deleting student from database...");
-    }
+    public void addStudent(Student student) {
 
-    @Override
-    public void update() {
-        System.out.println("DAO: Updating student in database...");
-    }
+        String sql = "INSERT INTO students(name, email, course, marks) VALUES(?,?,?,?)";
 
-    @Override
-    public void search(String keyword) {
-        System.out.println("DAO: Searching for student with keyword: " + keyword);
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, student.getName());
+            pstmt.setString(2, student.getEmail());
+            pstmt.setString(3, student.getCourse());
+            pstmt.setDouble(4, student.getMarks());
+
+            pstmt.executeUpdate();
+
+            System.out.println("Student inserted successfully.");
+
+        } catch (SQLException e) {
+            System.out.println("Insert failed: " + e.getMessage());
+        }
     }
 }

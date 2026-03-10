@@ -45,6 +45,8 @@ public class DashboardForm extends JFrame {
         setupSortingGroup();
         setupSlider();
         wireActions();
+        updateButton.setEnabled(false);
+        deleteButton.setEnabled(false);
         loadAllStudents();
     }
 
@@ -248,6 +250,9 @@ public class DashboardForm extends JFrame {
         txtEmail.setText(studentTable.getValueAt(selectedRow, 2).toString());
         comboBox1.setSelectedItem(studentTable.getValueAt(selectedRow, 3).toString());
         txtMarks.setText(studentTable.getValueAt(selectedRow, 4).toString());
+
+        updateButton.setEnabled(true);
+        deleteButton.setEnabled(true);
     }
 
     private void clearForm() {
@@ -258,6 +263,10 @@ public class DashboardForm extends JFrame {
         comboBox1.setSelectedIndex(0);
         studentTable.clearSelection();
         slider1.setValue(100);
+
+        updateButton.setEnabled(false);
+        deleteButton.setEnabled(false);
+
         txtName.requestFocus();
     }
 

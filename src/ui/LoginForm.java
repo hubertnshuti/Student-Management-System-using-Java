@@ -1,5 +1,7 @@
 package ui;
 
+import controller.LoginController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,7 +13,11 @@ public class LoginForm extends JFrame {
     private JButton btnLogin;
     private JButton btnReset;
 
+    private final LoginController loginController;
+
     public LoginForm() {
+        this.loginController = new LoginController();
+
         setContentPane(mainPanel);
         setTitle("Kigali Student Hub - Secure Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,6 +36,59 @@ public class LoginForm extends JFrame {
         btnLogin.setForeground(Color.WHITE);
 
         btnReset.putClientProperty("JButton.buttonType", "roundRect");
+
+        wireActions();
+    }
+
+    private void wireActions() {
+        btnLogin.addActionListener(e -> handleLogin());
+
+        btnReset.addActionListener(e -> {
+            txtUsername.setText("");
+            pwdPassword.setText("");
+            chkRememberMe.setSelected(false);
+            txtUsername.requestFocus();
+        });
+    }
+
+    private void handleLogin() {
+        String username = txtUsername.getText().trim();
+        String password = new String(pwdPassword.getPassword());
+
+        String validationMessage = loginController.validateLoginInput(username, password);
+
+        if (!validationMessage.equals("VALID")) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    validationMessage,
+                    "Validation Error",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        boolean success = loginController.login(username, password);
+
+        if (success) {
+            DashboardForm dashboardForm = new DashboardForm();
+            dashboardForm.setVisible(true);
+
+            JOptionPane.showMessageDialog(
+                    dashboardForm,
+                    "Login successful.",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Invalid username or password.",
+                    "Login Failed",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     public JTextField getTxtUsername() {

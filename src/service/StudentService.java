@@ -119,7 +119,7 @@ public class StudentService {
     public List<Student> sortStudentsByMarks() {
         return studentDAO.getAllStudents()
                 .stream()
-                .sorted(Comparator.comparingDouble(Student::getMarks))
+                .sorted(Comparator.comparingDouble(Student::getMarks).reversed())
                 .collect(Collectors.toList());
     }
 

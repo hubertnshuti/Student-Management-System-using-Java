@@ -1,22 +1,37 @@
 # Student Management System
 
-A **Java desktop app** for managing student records with login. Built with **Java Swing** for the interface, **SQLite** for data storage, and organized so the code is clean and easy to maintain.
+A **Java desktop application** for managing student records with authentication and a clean user interface.  
+Built using **Java Swing**, **SQLite**, and a **layered architecture** to keep the code modular, maintainable, and scalable.
 
 ![Java](https://img.shields.io/badge/Java-Swing-orange)
 ![Database](https://img.shields.io/badge/Database-SQLite-blue)
 ![Architecture](https://img.shields.io/badge/Architecture-Layered-green)
 
+---
+
+## Overview
+
+This project demonstrates how a complete desktop system can be structured using **separation of concerns**.  
+It allows administrators to securely log in and perform full **student record management** through an intuitive dashboard.
+
+The system emphasizes **clean architecture**, **data validation**, and **organized project structure**.
+
+---
+
 ## Features
 
-- Secure login authentication
-- Add student records
-- Update student information
+- User login authentication
+- Add new student records
+- Update existing student information
 - Delete students
 - Case-insensitive search
-- Sort by name, marks, or ID
-- Filter students by marks
-- JTable-based record display
+- Sort students by **name**, **marks**, or **ID**
+- Filter students based on marks
+- Table-based data display using **JTable**
 - Input validation and formatting utilities
+- Automatic database initialization
+
+---
 
 ## Tech Stack
 
@@ -24,27 +39,41 @@ A **Java desktop app** for managing student records with login. Built with **Jav
 - **Java Swing**
 - **SQLite**
 - **JDBC**
-- **FlatLaf**
+- **FlatLaf** (modern Swing UI styling)
+
+---
 
 ## Architecture
 
+The project follows a **layered architecture** to separate responsibilities:
+
 ```text
-models       → Data structures
-dao          → Database access
+models       → Data entities
+dao          → Database access layer
 service      → Business logic
 controller   → UI interaction logic
 util         → Validation & helper utilities
-ui           → Swing user interfaces
-db           → Database initialization
+ui           → Swing interfaces
+db           → Database setup & connection
 ```
+
+This structure keeps the system **organized, testable, and easy to extend**.
+
+---
 
 ## Interface
 
-### Login Interface
-Modern login screen with **FlatLaf** styling.
+### Login Screen
+A modern login interface styled with **FlatLaf** that authenticates users before accessing the system.
 
 ### Dashboard
-Student management dashboard with **CRUD operations**, **sorting**, **filtering**, and **table display**.
+The main dashboard provides tools to manage student records, including:
+
+- Create, update, and delete students
+- Sort and filter student lists
+- Display records using **JTable**
+
+---
 
 ## Project Structure
 
@@ -59,10 +88,12 @@ src
 └── util
 ```
 
+---
+
 ## Contributors
 
 ### Hubert Nshuti
-Backend architecture, database integration, and application logic.
+Backend architecture, database integration, application logic, and validation utilities.
 
 ### Happy Radouce Imbabazi
 User interface design, including the **Login** and **Dashboard** forms.

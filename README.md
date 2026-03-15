@@ -1,7 +1,6 @@
 # Student Management System
 
-A **Java desktop application** for managing student records with authentication and a clean user interface.  
-Built using **Java Swing**, **SQLite**, and a **layered architecture** to keep the code modular, maintainable, and scalable.
+A **Java desktop application** for managing student records with authentication, built using **Swing** and **SQLite** with a **layered architecture**.
 
 ![Java](https://img.shields.io/badge/Java-Swing-orange)
 ![Database](https://img.shields.io/badge/Database-SQLite-blue)

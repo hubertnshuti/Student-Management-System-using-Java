@@ -78,11 +78,10 @@ public class StudentService {
         }
 
         Student student = new Student(name, email, idText, course, marks);
-        studentDAO.updateStudent(id, student);
+        boolean updated = studentDAO.updateStudent(id, student);
 
-        return "Student updated successfully.";
+        return updated ? "Student updated successfully." : "Student not found.";
     }
-
     public String deleteStudent(String idText) {
 
         idText = StringUtil.cleanText(idText);

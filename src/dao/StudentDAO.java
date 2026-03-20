@@ -30,7 +30,6 @@ public class StudentDAO {
         }
     }
 
-
     public List<Student> getAllStudents() {
 
         List<Student> students = new ArrayList<>();
@@ -61,6 +60,33 @@ public class StudentDAO {
         return students;
     }
 
+    public Student getStudentById(int id) {
+
+        String sql = "SELECT * FROM students WHERE id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return new Student(
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        String.valueOf(rs.getInt("id")),
+                        rs.getString("course"),
+                        rs.getDouble("marks")
+                );
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Find by ID failed: " + e.getMessage());
+        }
+
+        return null;
+    }
 
     public void deleteStudent(int id) {
 
@@ -84,8 +110,7 @@ public class StudentDAO {
         }
     }
 
-
-    public void updateStudent(int id, Student student) {
+    public boolean updateStudent(int id, Student student) {
 
         String sql = "UPDATE students SET name = ?, email = ?, course = ?, marks = ? WHERE id = ?";
 
@@ -102,28 +127,29 @@ public class StudentDAO {
 
             if (rows > 0) {
                 System.out.println("Student updated successfully.");
+                return true;
             } else {
                 System.out.println("Student not found.");
+                return false;
             }
 
         } catch (SQLException e) {
             System.out.println("Update failed: " + e.getMessage());
+            return false;
         }
     }
-
 
     public List<Student> searchStudents(String keyword) {
 
         List<Student> students = new ArrayList<>();
 
         String sql = """
-            
                 SELECT * FROM students
-            WHERE CAST(id AS TEXT) LIKE ?
-               OR LOWER(name) LIKE LOWER(?)
-               OR LOWER(email) LIKE LOWER(?)
-               OR LOWER(course) LIKE LOWER(?)
-            """;
+                WHERE CAST(id AS TEXT) LIKE ?
+                   OR LOWER(name) LIKE LOWER(?)
+                   OR LOWER(email) LIKE LOWER(?)
+                   OR LOWER(course) LIKE LOWER(?)
+                """;
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

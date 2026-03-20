@@ -1,5 +1,5 @@
 import com.formdev.flatlaf.FlatDarkLaf;
-import ui.LoginForm;
+import ui.LoginFormm;
 import javax.swing.*;
 
 public class Main {
@@ -11,7 +11,7 @@ public class Main {
         }
 
         SwingUtilities.invokeLater(() -> {
-            new LoginForm().setVisible(true);
+            new LoginFormm().setVisible(true);
         });
     }
 }

@@ -12,8 +12,9 @@ public class LoginForm extends JFrame {
     private JCheckBox chkRememberMe;
     private JButton btnLogin;
     private JButton btnReset;
-    private JPanel usernameLabel;
-    private JLabel passwordLabel;
+    private JLabel lblUsername;
+    private JLabel lblPassword;
+    private JLabel lblMessage;
 
     private final LoginController loginController;
 
@@ -39,6 +40,9 @@ public class LoginForm extends JFrame {
 
         btnReset.putClientProperty("JButton.buttonType", "roundRect");
 
+        lblMessage.setForeground(Color.LIGHT_GRAY);
+        lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
+
         wireActions();
     }
 
@@ -60,12 +64,7 @@ public class LoginForm extends JFrame {
         String validationMessage = loginController.validateLoginInput(username, password);
 
         if (!validationMessage.equals("VALID")) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    validationMessage,
-                    "Validation Error",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            lblMessage.setText(validationMessage);
             return;
         }
 
@@ -75,21 +74,11 @@ public class LoginForm extends JFrame {
             DashboardForm dashboardForm = new DashboardForm();
             dashboardForm.setVisible(true);
 
-            JOptionPane.showMessageDialog(
-                    dashboardForm,
-                    "Login successful.",
-                    "Success",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
+            lblMessage.setText("Login successful.");
 
             dispose();
         } else {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Invalid username or password.",
-                    "Login Failed",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            lblMessage.setText("Invalid username or password.");
         }
     }
 

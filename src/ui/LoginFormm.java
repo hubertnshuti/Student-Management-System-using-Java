@@ -128,7 +128,7 @@ public class LoginFormm extends JFrame {
         progressBar1.setString("Connecting to database...");
         lblMessage.setText("Please wait...");
 
-        Timer timer = new Timer(15, new ActionListener() {
+        Timer timer = new Timer(30, new ActionListener() {
             int progress = 0;
             @Override
             public void actionPerformed(ActionEvent e) {

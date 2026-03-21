@@ -163,12 +163,12 @@ public class StudentDAO {
         List<Student> students = new ArrayList<>();
 
         String sql = """
-                SELECT * FROM students
-                WHERE CAST(id AS TEXT) LIKE ?
-                   OR LOWER(name) LIKE LOWER(?)
-                   OR LOWER(email) LIKE LOWER(?)
-                   OR LOWER(course) LIKE LOWER(?)
-                """;
+            SELECT * FROM students
+            WHERE CAST(id AS CHAR) LIKE ?
+              OR LOWER(name) LIKE LOWER(?)
+              OR LOWER(email) LIKE LOWER(?)
+              OR LOWER(course) LIKE LOWER(?)
+            """;
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

@@ -9,6 +9,25 @@ import java.util.List;
 
 public class StudentDAO {
 
+    public boolean emailExists(String email) {
+        String sql = "SELECT 1 FROM students WHERE email = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                // If rs.next() is true, it found a matching email.
+                return rs.next();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Email check failed: " + e.getMessage());
+        }
+        return false;
+    }
+
     public void addStudent(Student student) {
 
         String sql = "INSERT INTO students(name, email, course, marks) VALUES(?,?,?,?)";

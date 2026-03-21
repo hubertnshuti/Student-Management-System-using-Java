@@ -26,14 +26,37 @@ public class DatabaseInitializer {
                 );
                 """;
 
+        // Default admin user
+        String seedUser = """
+                INSERT IGNORE INTO users (username, password)
+                VALUES ('admin', '1234');
+                """;
+
+        // Default students
+        String seedStudents = """
+                INSERT IGNORE INTO students (id, name, email, course, marks)
+                VALUES
+                (1, 'Hubert Nshuti', 'hubert@ur.ac.rw', 'Computer Science', 85),
+                (2, 'Radouce Imbabazi', 'radouce@ur.ac.rw', 'Information Technology', 78),
+                (3, 'David Uwimana', 'david@ur.ac.rw', 'Software Engineering', 90),
+                (4, 'Kalisa Jean', 'kalisa@ur.ac.rw', 'Computer Science', 72),
+                (5, 'Ngenzi Ingenzi', 'ngenzi@ur.ac.rw', 'Information Technology', 88);
+                """;
+
         try (Connection conn = DBConnection.getConnection();
              Statement stmt = conn.createStatement()) {
 
+            // Create tables
             stmt.execute(createStudentsTableSQL);
             stmt.execute(createUsersTableSQL);
 
-            System.out.println("Students table ready.");
-            System.out.println("Users table ready.");
+            System.out.println("Tables ready.");
+
+            // Seed data
+            stmt.execute(seedUser);
+            stmt.execute(seedStudents);
+
+            System.out.println("Default data ensured.");
 
         } catch (SQLException e) {
             System.out.println("Database initialization failed: " + e.getMessage());

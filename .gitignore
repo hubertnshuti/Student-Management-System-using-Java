@@ -9,3 +9,6 @@ out/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+target/
+sms.db

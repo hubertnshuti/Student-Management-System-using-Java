@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class UserDAO {
 
     public void addUser(User user) {
-        String sql = "INSERT OR IGNORE INTO users(username, password) VALUES(?, ?)";
+        String sql = "INSERT IGNORE INTO users(username, password) VALUES(?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

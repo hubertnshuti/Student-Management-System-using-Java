@@ -28,6 +28,10 @@ public class StudentService {
             return "Invalid student data.";
         }
 
+        if (studentDAO.emailExists(email)) {
+            return "Failed: A student with this email already exists.";
+        }
+
         double marks = Double.parseDouble(marksText);
 
         Student student = new Student(name, email, "", course, marks);

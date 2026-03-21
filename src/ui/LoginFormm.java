@@ -25,6 +25,7 @@ public class LoginFormm extends JFrame {
     private JLabel lblMessage;
     private JProgressBar progressBar1;
     private JLabel lblTitle;
+    private JLabel lblWelcome;
 
     private final LoginController loginController;
 
@@ -55,7 +56,7 @@ public class LoginFormm extends JFrame {
         Font buttonFont = new Font("SansSerif", Font.BOLD, 15);
 
         // Make the Title Pop!
-        lblTitle.setFont(titleFont);
+//        lblTitle.setFont(titleFont);
         lblTitle.setForeground(new Color(240, 240, 240)); // Bright off-white
 
         // Apply Fonts to Labels & Checkbox

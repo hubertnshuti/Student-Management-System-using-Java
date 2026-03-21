@@ -35,7 +35,7 @@ public class DashboardForm extends JFrame {
     public DashboardForm() {
         dashboardController = new DashboardController();
 
-        setTitle("Student Management System - Dashboard");
+        setTitle("UR-CST Student Management System - Dashboard");
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
@@ -48,9 +48,11 @@ public class DashboardForm extends JFrame {
         setupMenuBar();
         applyModernStyling();
         wireActions();
+        setupRealTimeValidation();
 
         updateButton.setEnabled(false);
         deleteButton.setEnabled(false);
+        addButton.setEnabled(false);
         loadAllStudents();
     }
 
@@ -439,6 +441,45 @@ public class DashboardForm extends JFrame {
         deleteButton.setEnabled(true);
     }
 
+    private void validateInputFields() {
+        boolean isValid = true;
+
+        if (txtName.getText().trim().isEmpty()) {
+            isValid = false;
+        }
+
+        String email = txtEmail.getText().trim();
+        if (email.isEmpty() || !email.contains("@") || !email.contains(".")) {
+            isValid = false;
+        }
+
+        try {
+            double marks = Double.parseDouble(txtMarks.getText().trim());
+            if (marks < 0 || marks > 100) {
+                isValid = false;
+            }
+        } catch (NumberFormatException e) {
+            isValid = false;
+        }
+
+        addButton.setEnabled(isValid);
+    }
+
+    private void setupRealTimeValidation() {
+        javax.swing.event.DocumentListener inputListener = new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) { validateInputFields(); }
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) { validateInputFields(); }
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { validateInputFields(); }
+        };
+
+        txtName.getDocument().addDocumentListener(inputListener);
+        txtEmail.getDocument().addDocumentListener(inputListener);
+        txtMarks.getDocument().addDocumentListener(inputListener);
+    }
+
     private void clearForm() {
         txtName.setText("");
         txtEmail.setText("");
@@ -450,6 +491,7 @@ public class DashboardForm extends JFrame {
 
         updateButton.setEnabled(false);
         deleteButton.setEnabled(false);
+        addButton.setEnabled(false);
 
         txtName.requestFocus();
     }

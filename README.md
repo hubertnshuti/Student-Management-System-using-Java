@@ -64,12 +64,18 @@ This structure keeps the system **organized, testable, and easy to extend**.
 ### Login Screen
 A modern login interface styled with **FlatLaf** that authenticates users before accessing the system.
 
+<img width="982" height="589" alt="image" src="https://github.com/user-attachments/assets/cedd1bcc-5128-4bd3-bfea-4bb5f21731e4" />
+
+
 ### Dashboard
 The main dashboard provides tools to manage student records, including:
 
 - Create, update, and delete students
 - Sort and filter student lists
 - Display records using **JTable**
+
+  <img width="979" height="585" alt="image" src="https://github.com/user-attachments/assets/3c422150-d29c-4bad-ad02-da544bb85d5b" />
+
 
 ---
 
